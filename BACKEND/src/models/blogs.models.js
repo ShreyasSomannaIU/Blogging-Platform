@@ -15,7 +15,7 @@ const blogSchema = new mongoose.Schema({
     },
     likes: [{ 
         type: Schema.Types.ObjectId, 
-        ref: 'BlogLike' 
+        ref: 'like' 
     }],
 
     hashTags: { 
@@ -26,9 +26,11 @@ const blogSchema = new mongoose.Schema({
         maxlength: 5000 
     },
     comments: [{ 
-        type: Schema.Types.ObjectId, ref: 'BlogComment' 
+        type: Schema.Types.ObjectId, ref: 'comment' 
     }]
 },
-{ timestamps: true })
+{ 
+    timestamps: true 
+})
 
 export const Blog = mongoose.model('Blog', blogSchema);
