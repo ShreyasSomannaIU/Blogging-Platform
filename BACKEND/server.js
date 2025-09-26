@@ -1,9 +1,8 @@
 import express from 'express'
-
 const app = express()
 
-app.get('/',()=>{
-    res.send("SERVER RUNNING")
+app.get('/',(req, res)=>{
+    res.end("SERVER RUNNING")
 })
 
 app.listen('8000', ()=>{
