@@ -1,4 +1,4 @@
-import { Blog } from "../models/blogs.models.js";
+import { blog } from "../models/blogs.models.js";
 import mongoose from "mongoose";
 
 // Create a new blog
@@ -6,7 +6,7 @@ export const createBlog = async (req, res) => {
   try {
     const { title, content, author, hashTags, img } = req.body;
 
-    const newBlog = new Blog({
+    const newBlog = new blog({
       title,
       content,
       author,
@@ -24,7 +24,7 @@ export const createBlog = async (req, res) => {
 // Get all blogs
 export const getBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find()
+    const blogs = await blog.find()
       .populate("author", "name email")
       .populate("likes", "user") 
       .populate("comments");
@@ -37,7 +37,7 @@ export const getBlogs = async (req, res) => {
 // Get single blog by ID
 export const getBlogById = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id)
+    const blog = await blog.findById(req.params.id)
       .populate("author", "name email")
       .populate("likes", "user")
       .populate("comments");
@@ -53,7 +53,7 @@ export const getBlogById = async (req, res) => {
 // Update blog
 export const updateBlog = async (req, res) => {
   try {
-    const updatedBlog = await Blog.findByIdAndUpdate(
+    const updatedBlog = await blog.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -70,7 +70,7 @@ export const updateBlog = async (req, res) => {
 // Delete blog
 export const deleteBlog = async (req, res) => {
   try {
-    const deletedBlog = await Blog.findByIdAndDelete(req.params.id);
+    const deletedBlog = await blog.findByIdAndDelete(req.params.id);
 
     if (!deletedBlog) return res.status(404).json({ message: "Blog not found" });
 
@@ -83,7 +83,7 @@ export const deleteBlog = async (req, res) => {
 // Like a blog
 export const likeBlog = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await blog.findById(req.params.id);
 
     if (!blog) return res.status(404).json({ message: "Blog not found" });
 
@@ -105,7 +105,7 @@ export const likeBlog = async (req, res) => {
 // Unlike a blog
 export const unlikeBlog = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await blog.findById(req.params.id);
 
     if (!blog) return res.status(404).json({ message: "Blog not found" });
 

@@ -1,6 +1,6 @@
-import { Comment } from "../models/Comment.js";
-import { Blog } from "../models/Blog.js";
-import { User } from "../models/User.js";
+import { comment } from "../models/comments.models.js";
+import { blog } from "../models/blogs.models.js";
+import { user } from "../models/user.models.js";
 
 // Create a new comment
 export const createComment = async (req, res) => {
@@ -8,13 +8,13 @@ export const createComment = async (req, res) => {
     const { comment, user, blog } = req.body;
 
     // check if blog & user exist
-    const foundBlog = await Blog.findById(blog);
+    const foundBlog = await blog.findById(blog);
     if (!foundBlog) return res.status(404).json({ message: "Blog not found" });
 
-    const foundUser = await User.findById(user);
+    const foundUser = await user.findById(user);
     if (!foundUser) return res.status(404).json({ message: "User not found" });
 
-    const newComment = new Comment({
+    const newComment = new comment({
       comment,
       user,
       blog,
@@ -35,7 +35,7 @@ export const createComment = async (req, res) => {
 // Get all comments
 export const getComments = async (req, res) => {
   try {
-    const comments = await Comment.find()
+    const comments = await comment.find()
       .populate("user", "name email")
       .populate("blog", "title");
     res.status(200).json(comments);
@@ -47,7 +47,7 @@ export const getComments = async (req, res) => {
 // Get a single comment by ID
 export const getCommentById = async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.id)
+    const comment = await comment.findById(req.params.id)
       .populate("user", "name email")
       .populate("blog", "title");
 
@@ -64,7 +64,7 @@ export const updateComment = async (req, res) => {
   try {
     const { comment } = req.body;
 
-    const updatedComment = await Comment.findByIdAndUpdate(
+    const updatedComment = await comment.findByIdAndUpdate(
       req.params.id,
       { comment },
       { new: true }

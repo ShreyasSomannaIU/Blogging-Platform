@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import { user } from "./user.models.js";
+import { like } from "./likes.models.js";
+import { Comment } from "./comments.models.js";
 
 const blogSchema = new mongoose.Schema({
     title: {
@@ -11,7 +14,8 @@ const blogSchema = new mongoose.Schema({
     },
     author: { 
         type: Schema.Types.ObjectId,
-        ref: 'User', required: true
+        ref: 'user', 
+        required: true
     },
     likes: [{ 
         type: Schema.Types.ObjectId, 
@@ -19,18 +23,20 @@ const blogSchema = new mongoose.Schema({
     }],
 
     hashTags: { 
-        type: String, maxlength: 5000 
+        type: String, 
+        maxlength: 5000 
     },
     img: { 
         type: String, 
         maxlength: 5000 
     },
     comments: [{ 
-        type: Schema.Types.ObjectId, ref: 'comment' 
+        type: Schema.Types.ObjectId, 
+        ref: 'comment' 
     }]
 },
 { 
     timestamps: true 
 })
 
-export const Blog = mongoose.model('Blog', blogSchema);
+export const blog = mongoose.model('blog', blogSchema);

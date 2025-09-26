@@ -1,4 +1,5 @@
-import mongoose from 'mongoose' 
+import mongoose from 'mongoose'
+import { User } from './user.models.js'; 
 
 const likeSchema = new Schema({
   

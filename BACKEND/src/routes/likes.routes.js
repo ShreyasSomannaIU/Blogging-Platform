@@ -5,7 +5,7 @@ import {
   getLikesByBlog,
   getLikesByUser,
   checkUserLike,
-} from "../controllers/likeController.js";
+} from "../controllers/likes.controller.js";
 
 const router = express.Router();
 

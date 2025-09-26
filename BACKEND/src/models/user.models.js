@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { blog } from "./blogs.models";
 
 const userSchema = new mongoose.Schema({
   email: { 
@@ -27,11 +28,11 @@ const userSchema = new mongoose.Schema({
 },
   blogs: [{ 
     type: Schema.Types.ObjectId, 
-    ref: 'Blog' 
+    ref: 'blog' 
 }]
 }, 
 {
   timestamps: true 
 });
 
-export const User = mongoose.model('User', userSchema);
+export const user = mongoose.model('user', userSchema);
