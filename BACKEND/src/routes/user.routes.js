@@ -9,6 +9,8 @@ import {
   getUserBlogs,
 } from "../controllers/user.controllers.js";
 
+import { Router } from "express";
+
 const router = express.Router();
 
 router.post("/register", registerUser);
